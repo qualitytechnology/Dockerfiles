@@ -1,7 +1,7 @@
 FROM alpine:3.5
 LABEL maintainer="Tibor Vukovic <vukovictibor@gmail.com>"
 
-ENV KUBE_LATEST_VERSION="v1.10.4"
+ENV KUBE_LATEST_VERSION="v1.11.1"
 
 RUN apk add --update ca-certificates bash gnupg jq py-pip \
   && apk add --update -t deps curl gettext \
