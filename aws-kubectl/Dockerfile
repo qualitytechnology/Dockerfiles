@@ -1,7 +1,7 @@
 FROM alpine:3.5
 LABEL maintainer="Tibor Vukovic <vukovictibor@gmail.com>"
 
-ENV KUBE_LATEST_VERSION="v1.11.1"
+ENV KUBE_LATEST_VERSION="v1.11.3"
 
 RUN apk add --update ca-certificates bash gnupg jq py-pip \
   && apk add --update -t deps curl gettext \
@@ -9,10 +9,10 @@ RUN apk add --update ca-certificates bash gnupg jq py-pip \
   && rm -rf /var/cache/apk/* 
 
 RUN curl -L https://storage.googleapis.com/kubernetes-release/release/${KUBE_LATEST_VERSION}/bin/linux/amd64/kubectl -o /usr/local/bin/kubectl \
-  & curl -L https://amazon-eks.s3-us-west-2.amazonaws.com/1.10.3/2018-06-05/bin/linux/amd64/heptio-authenticator-aws -o /usr/local/bin/heptio-authenticator-aws \
+  & curl -L https://github.com/kubernetes-sigs/aws-iam-authenticator/releases/download/v0.3.0/heptio-authenticator-aws_0.3.0_linux_amd64 -o /usr/local/bin/aws-iam-authenticator \
   & wait \
   && chmod +x /usr/local/bin/kubectl \
-  && chmod +x /usr/local/bin/heptio-authenticator-aws 
+  && chmod +x /usr/local/bin/aws-iam-authenticator
 
 RUN mkdir -p kube
 ADD . .
